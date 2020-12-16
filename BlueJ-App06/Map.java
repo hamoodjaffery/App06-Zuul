@@ -10,6 +10,12 @@ public class Map
 {
     private Room startRoom;
     
+    public Map()
+    {
+        createRooms();
+        
+    }
+    
     /**
     * Create all the rooms and link their exits together.
     */
@@ -28,6 +34,7 @@ public class Map
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        outside.addItem(Items.FOOD);
 
         theater.setExit("west", outside);
 

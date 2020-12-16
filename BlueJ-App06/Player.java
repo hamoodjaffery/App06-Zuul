@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Write a description of class Player here.
@@ -8,13 +9,18 @@
 public class Player
 {
     private String name;
+    
     private int health;
     private int score;
     private int moves;
     
+    private ArrayList<Items> items;
+    
     public Player(String name)
     {
         this.name = name;
+        items = new ArrayList<Items>();
+        
         health = 100;
         moves = 0;
         score = 0;
@@ -42,5 +48,20 @@ public class Player
     public String getName()
     {
         return name;
+    }
+    
+    public void addItem(Items item)
+    {
+        items.add(item);
+            score+= 10;
+        
+        if(item == Items.FOOD)
+            health += 10;
+    }
+    
+    public void print()
+    {
+        System.out.println("\n Move: " + moves + ": " +  name + 
+            " Health: " + health + " Score: " + score + "\n");
     }
 }

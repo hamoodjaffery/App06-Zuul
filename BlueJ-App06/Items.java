@@ -7,5 +7,5 @@
  */
 public enum Items
 {
-    WATER, BOTTLE, FOOD, bandages
+    NONE, WATER, BOTTLE, FOOD, bandages
 }

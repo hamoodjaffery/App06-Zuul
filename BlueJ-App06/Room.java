@@ -19,8 +19,10 @@ import java.util.Iterator;
 public class Room 
 {
     private String description;
-    private HashMap<String, Room> exits;        // stores exits of this room.
-
+    // stores exits of this room.
+    private HashMap<String, Room> exits;
+    private Items item;
+    
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -31,6 +33,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
+        item = Items.NONE;
     }
 
     /**
@@ -60,7 +63,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+         return "You are " + description + ".\n" + getExitString();
     }
 
     /**
@@ -89,6 +92,16 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+    
+    public void addItem(Items item)
+    {
+        this.item = item;
+    }
+    
+    public Items getItem()
+    {
+        return item;
     }
 }
 

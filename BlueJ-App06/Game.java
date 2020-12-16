@@ -96,7 +96,15 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
-
+                
+            case SEARCH:
+                searchRoom(command);
+                break;                
+            
+            case TAKE:
+                takeItem();
+                break; 
+                
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -138,15 +146,34 @@ public class Game
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
+        if (nextRoom == null) 
+        {
             System.out.println("There is no door!");
         }
-        else {
+        else 
+        {
             currentRoom = nextRoom;
+            player.move();
+            player.print();
             System.out.println(currentRoom.getLongDescription());
         }
     }
 
+    /** 
+     * Try to go in one direction. If there is an exit, enter the new
+     * room, otherwise print an error message.
+     */
+    private void searchRoom(Command command) 
+    {
+        System.out.println("Items found: " + currentRoom.getItem());
+    } 
+    
+    private void takeItem()
+    {
+        Items item = currentRoom.getItem();
+        player.addItem(item);
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
