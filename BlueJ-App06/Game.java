@@ -1,8 +1,5 @@
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
+ *  
  * 
  *  To play this game, create an instance of this class and call the "play"
  *  method.
@@ -21,10 +18,10 @@ public class Game
 {
     private Map map;
     private Player player;
-
+    private boolean finished = false;
     private Parser parser;
     private Room currentRoom;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -36,7 +33,6 @@ public class Game
         player = new Player("Hamood");
     }
 
-    
 
     /**
      *  Main play routine.  Loops until end of play.
@@ -47,15 +43,13 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
-        boolean finished = false;
-        
+
         while (! finished) 
         {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        
+
         System.out.println("Thank you for playing.  Good bye.");
     }
 
@@ -86,30 +80,34 @@ public class Game
         switch (commandWord) 
         {
             case UNKNOWN:
-                System.out.println("I don't know what you mean...");
-                break;
+            System.out.println("I don't know what you mean...");
+            break;
 
             case HELP:
-                printHelp();
-                break;
+            printHelp();
+            break;
 
             case GO:
-                goRoom(command);
-                break;
-                
+            goRoom(command);
+            break;
+
             case SEARCH:
-                searchRoom(command);
-                break;                
-            
+            searchRoom(command);
+            break;                
+
             case TAKE:
-                takeItem();
-                break; 
-                
+            takeItem();
+            break;
+
+            case PEEK:
+            peekRoom(command);
+            break;
+
             case QUIT:
-                wantToQuit = quit(command);
-                break;
+            wantToQuit = quit(command);
+            break;
         }
-        return wantToQuit;
+        return wantToQuit || finished;
     }
 
     // implementations of user commands:
@@ -153,9 +151,26 @@ public class Game
         else 
         {
             currentRoom = nextRoom;
-            player.move();
-            player.print();
-            System.out.println(currentRoom.getLongDescription());
+            
+            if (player.getHealth() >= 10) {
+                player.move();
+                player.print();
+                System.out.println(currentRoom.getLongDescription());   
+                if (nextRoom.hasSecurity()) {
+                    System.out.println("Security caught you. Game over.");
+                    finished = true;
+                }
+            } else {
+                System.out.println("You died of exhaustion. Game over.");
+                finished = true;
+            }
+
+            if (player.hasTreasure()) {
+                if(currentRoom.getName().equals("Outside")) {
+                    System.out.println("You have successfully found treasure and escaped.");
+                    finished = true;
+                }
+            }
         }
     }
 
@@ -167,13 +182,25 @@ public class Game
     {
         System.out.println("Items found: " + currentRoom.getItem());
     } 
-    
+
     private void takeItem()
     {
         Items item = currentRoom.getItem();
-        player.addItem(item);
+        if (!currentRoom.isItemTaken()) {
+            player.addItem(item);
+            currentRoom.setItemTaken();
+        }
+        else {
+            System.out.println("No more items to consume.");
+        }
     }
-    
+
+    private void peekRoom(Command command) {
+        String direction = command.getSecondWord();
+        Room roomToPeek = currentRoom.getExit(direction);
+        player.peek(roomToPeek);
+    }
+
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

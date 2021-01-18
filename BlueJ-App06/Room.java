@@ -18,10 +18,13 @@ import java.util.Iterator;
 
 public class Room 
 {
+    private String name;
     private String description;
     // stores exits of this room.
     private HashMap<String, Room> exits;
     private Items item;
+    private boolean hasSecurity = false;
+    boolean isItemTaken = false;
     
     /**
      * Create a room described "description". Initially, it has
@@ -29,11 +32,13 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String name, String description, boolean hasSecurity) 
     {
+        this.name = name;
         this.description = description;
         exits = new HashMap<>();
         item = Items.NONE;
+        this.hasSecurity = hasSecurity;
     }
 
     /**
@@ -102,6 +107,23 @@ public class Room
     public Items getItem()
     {
         return item;
+    }
+    
+    public boolean isItemTaken() {
+        return isItemTaken;
+    }
+    
+    public void setItemTaken() {
+        isItemTaken = true;
+        item = Items.NONE;
+    }
+    
+    public boolean hasSecurity() {
+        return hasSecurity;
+    }
+    
+    public String getName() {
+        return name;
     }
 }
 

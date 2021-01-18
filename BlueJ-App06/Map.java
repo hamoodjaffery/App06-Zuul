@@ -21,29 +21,36 @@ public class Map
     */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, hidden;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        outside = new Room("Outside", "outside the main entrance of the university", false);
+        theater = new Room("Theater", "in a lecture theater", false);
+        pub = new Room("Pub", "in the campus pub", false);
+        lab = new Room("Lab", "in a computing lab", false);
+        office = new Room("Office", "in the computing admin office", true);
+        hidden = new Room("Treasure", "in the hidden treasure room", false);
         
         // initialise room exits
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
-        outside.addItem(Items.FOOD);
 
         theater.setExit("west", outside);
+        theater.addItem(Items.FOOD);
 
         pub.setExit("east", outside);
-
+        pub.addItem(Items.WATER);
+        
         lab.setExit("north", outside);
         lab.setExit("east", office);
+        lab.setExit("south",hidden);
+        lab.addItem(Items.KEY);       
 
         office.setExit("west", lab);
+        
+        hidden.setExit("north", lab);
+        hidden.addItem(Items.TREASURE);
 
         startRoom = outside;  // start game outside
    }
