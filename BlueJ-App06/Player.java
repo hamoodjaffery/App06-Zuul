@@ -88,7 +88,7 @@ public class Player
     }
 
     public void peek(Room room) {
-        if (peekingPower > 0) {
+        if(room!=null) {
             peekingPower--;
             System.out.println("This room has security: " + room.hasSecurity());
             return;
