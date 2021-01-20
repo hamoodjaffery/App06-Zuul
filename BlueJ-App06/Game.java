@@ -34,9 +34,6 @@ public class Game
     {            
         printWelcome();
 
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-
         while (! finished) 
         {
             Command command = parser.getCommand();
@@ -52,8 +49,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to the World of Hidden Treasure");
+        System.out.println("World of Hidden Treasure is a new, simple text-based adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -103,8 +100,6 @@ public class Game
         return wantToQuit || finished;
     }
 
-    // implementations of user commands:
-
     /**
      * Print out some help information.
      * 
@@ -132,9 +127,7 @@ public class Game
 
         String direction = command.getSecondWord();
 
-        
         Room nextRoom = currentRoom.getExit(direction);
-
         if (nextRoom == null) 
         {
             System.out.println("There is no door!");
@@ -151,7 +144,7 @@ public class Game
                     System.out.println("Security caught you. Game over.");
                     finished = true;
                 }
-            } else {
+            }else {
                 System.out.println("You died of exhaustion. Game over.");
                 finished = true;
             }
