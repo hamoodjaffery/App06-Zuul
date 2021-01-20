@@ -1,9 +1,10 @@
 
 /**
- * Enumeration class Items - write a description of the enum class here
+ * Enumeration class Items - Items that player can take during the game to
+ * increase the health and score. 
  *
- * @author (your name here)
- * @version (version number or date here)
+ * @by Hamood Jaffery
+ * @date 20-01-21
  */
 public enum Items
 {

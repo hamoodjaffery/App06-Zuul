@@ -1,17 +1,11 @@
-/**
- *  
- * 
- *  To play this game, create an instance of this class and call the "play"
- *  method.
- * 
+/** This is the main class of the game "Hidden Treasure". 
  *  This main class creates and initialises all the others: it creates all
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @by Hamood Jaffery
+ * @date 20-01-21
  * 
- * Modified and extended by Your name
  */
 
 public class Game 
@@ -32,7 +26,6 @@ public class Game
         currentRoom = map.getStart();
         player = new Player("Hamood");
     }
-
 
     /**
      *  Main play routine.  Loops until end of play.
@@ -114,8 +107,7 @@ public class Game
 
     /**
      * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the 
-     * command words.
+     * 
      */
     private void printHelp() 
     {
@@ -134,14 +126,13 @@ public class Game
     {
         if(!command.hasSecondWord()) 
         {
-            // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
             return;
         }
 
         String direction = command.getSecondWord();
 
-        // Try to leave current room.
+        
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) 
@@ -151,7 +142,7 @@ public class Game
         else 
         {
             currentRoom = nextRoom;
-            
+
             if (player.getHealth() >= 10) {
                 player.move();
                 player.print();
@@ -213,7 +204,7 @@ public class Game
             return false;
         }
         else {
-            return true;  // signal that we want to quit
+            return true;
         }
     }
 }

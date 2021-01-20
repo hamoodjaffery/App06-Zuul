@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class Map here.
+ * This is map class creates an instance of the Game class.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @by Hamood Jaffery
+ * @date 20-01-21
  */
 
 public class Map

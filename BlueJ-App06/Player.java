@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 /**
- * Write a description of class Player here.
+ * This player class creates a player for the game.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * by Hamood Jaffery
+ * date 20-01-21
  */
 public class Player
 {

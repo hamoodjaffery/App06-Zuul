@@ -1,10 +1,11 @@
 
 /**
- * This class creates an instance of the Game
- * class and then calls on its run method.
+ * This class creates creates an instance of the Game class.
+ * Call this class to play the game.
+ * 
  *
- * @author Derek Peacock
- * @version 0.1
+ * @by Hamood Jaffery
+ * @Date 20-01-21
  */
 public class Program
 {
